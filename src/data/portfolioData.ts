@@ -41,7 +41,7 @@ export const projects: Project[] = [
     title: "Grafiki Social Media - Candy Doctors",
     description: "Seria grafik promocyjnych dla duetu DJ-skiego. Spójny styl wizualny, przyciągające uwagę posty na Facebook i Instagram.",
     category: "Grafiki Canva",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800&q=80",
     tags: ["Canva", "Social Media", "Branding"]
   },
   {
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     title: "Kampania Facebook Ads - The X Festival",
     description: "Kampania reklamowa dla festiwalu muzycznego. Targetowanie, optymalizacja budżetu, kreacje reklamowe. ROI 250%.",
     category: "Social Media",
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80",
     tags: ["Facebook Ads", "Marketing", "ROI"]
   },
   {
