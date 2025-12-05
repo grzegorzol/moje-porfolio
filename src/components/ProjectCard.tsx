@@ -17,52 +17,35 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link to={`/projekty/${project.id}`} className="group block">
-        <div className="relative overflow-hidden rounded-2xl bg-card border border-border transition-all duration-500 hover:shadow-lg hover:border-primary/20">
+        <div className="relative overflow-hidden rounded-2xl bg-secondary transition-all duration-300 hover:shadow-xl">
           {/* Image */}
-          <div className="relative aspect-[16/10] overflow-hidden">
+          <div className="relative aspect-[4/3] overflow-hidden">
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
             
-            {/* Category Badge */}
-            <div className="absolute top-4 left-4">
-              <span className="px-3 py-1.5 text-xs font-medium rounded-full bg-primary/90 text-primary-foreground backdrop-blur-sm">
-                {project.category}
-              </span>
-            </div>
-
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
+            
             {/* Arrow Icon */}
-            <motion.div
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-            >
-              <ArrowUpRight className="w-5 h-5 text-primary" />
-            </motion.div>
+            <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <ArrowUpRight className="w-5 h-5 text-foreground" />
+            </div>
           </div>
 
           {/* Content */}
           <div className="p-6">
-            <h3 className="text-xl font-display font-semibold mb-2 group-hover:text-primary transition-colors">
+            <span className="text-xs font-medium text-primary uppercase tracking-wider">
+              {project.category}
+            </span>
+            <h3 className="text-xl font-display font-semibold mt-2 text-foreground">
               {project.title}
             </h3>
-            <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+            <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
               {project.description}
             </p>
-            
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 text-xs rounded-md bg-secondary text-secondary-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </Link>
