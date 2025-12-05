@@ -27,7 +27,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-foreground mb-6 leading-[1.1]"
           >
-            Grzegorz Olszowik
+            Zapraszam do współpracy
           </motion.h1>
 
           {/* Subtitle */}
