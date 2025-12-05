@@ -47,7 +47,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            Tworzę strony WordPress, projektuję w Canva, zarządzam social media i prowadzę kampanie reklamowe
+            Tworzę strony internetowe, projektuję w Canva, zarządzam social media i prowadzę kampanie reklamowe
           </motion.p>
 
           {/* CTA Buttons */}
