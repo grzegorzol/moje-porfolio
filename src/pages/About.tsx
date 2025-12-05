@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
+import profileImage from "@/assets/grzegorz-profile.jpg";
 
 const experiences = [
   {
@@ -72,7 +73,7 @@ export default function About() {
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-secondary">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80"
+                  src={profileImage}
                   alt="Grzegorz Olszowik"
                   className="w-full h-full object-cover"
                 />
