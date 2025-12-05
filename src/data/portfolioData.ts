@@ -54,12 +54,20 @@ export const projects: Project[] = [
   },
   {
     id: "4",
-    title: "Kompleksowa Strategia Marketingowa",
-    description: "Pełna strategia digital dla startupu technologicznego. Wzrost organicznych zasięgów o 300% w 6 miesięcy.",
+    title: "Strategia Marketingowa - Dealz Polska",
+    description: "Koordynacja otwarć nowych sklepów, materiały marketingowe, analiza ankiet klienckich. Wsparcie przy 15+ otwarciach sklepów.",
     category: "Marketing",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     tags: ["Strategia", "Digital", "Wzrost"]
   }
+];
+
+export const projectCategories = [
+  { id: "all", label: "Wszystkie" },
+  { id: "grafiki-canva", label: "Grafiki Canva" },
+  { id: "marketing", label: "Marketing" },
+  { id: "social-media", label: "Social Media" },
+  { id: "strony-wordpress", label: "Strony WordPress" }
 ];
 
 export const blogPosts: BlogPost[] = [
@@ -67,11 +75,11 @@ export const blogPosts: BlogPost[] = [
     id: "1",
     title: "Jak skutecznie budować zaangażowanie na Instagramie w 2024",
     excerpt: "Poznaj sprawdzone strategie zwiększania engagement rate na Instagramie. Od algorytmów po reels - wszystko co musisz wiedzieć.",
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    content: `Instagram w 2024 roku to platforma, która ciągle ewoluuje. Aby skutecznie budować zaangażowanie, musisz rozumieć, jak działa algorytm i jakie treści preferują użytkownicy.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Kluczem do sukcesu jest regularna publikacja wartościowych treści, wykorzystanie Reels oraz aktywna interakcja z obserwatorami. Pamiętaj, że algorytm premiuje konta, które generują dużo interakcji w krótkim czasie po publikacji.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.`,
+Warto również inwestować w Stories i wykorzystywać wszystkie dostępne funkcje interaktywne, takie jak ankiety, quizy czy naklejki z pytaniami.`,
     category: "social-media",
     categoryLabel: "Social Media",
     image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80",
@@ -82,11 +90,11 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     id: "2",
     title: "Bezpieczeństwo danych w marketingu cyfrowym - kompletny przewodnik",
     excerpt: "Jak chronić dane klientów i być zgodnym z RODO? Praktyczne wskazówki dla marketerów i właścicieli firm.",
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.
+    content: `W erze cyfrowej ochrona danych osobowych to nie tylko wymóg prawny, ale również kwestia budowania zaufania z klientami.
 
-Praesent euismod, nisl eget ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+RODO nakłada na firmy szereg obowiązków związanych z przetwarzaniem danych osobowych. Jako marketer musisz zadbać o odpowiednie zgody, bezpieczne przechowywanie danych i jasną politykę prywatności.
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.`,
+Pamiętaj o regularnych audytach bezpieczeństwa i szkoleniach dla zespołu. Transparentność w komunikacji z klientami o tym, jak wykorzystujesz ich dane, buduje długoterminowe zaufanie.`,
     category: "bezpieczenstwo",
     categoryLabel: "Bezpieczeństwo",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
@@ -97,11 +105,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     id: "3",
     title: "AI w marketingu - jak wykorzystać sztuczną inteligencję w swojej strategii",
     excerpt: "ChatGPT, Midjourney, automatyzacja - poznaj narzędzia AI, które zrewolucjonizują Twój marketing.",
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras porta malesuada leo, vel efficitur urna volutpat id.
+    content: `Sztuczna inteligencja zmienia sposób, w jaki tworzymy i dystrybuujemy treści marketingowe. Narzędzia takie jak ChatGPT czy Midjourney oferują niesamowite możliwości.
 
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.
+AI może pomóc w generowaniu pomysłów na treści, tworzeniu pierwszych wersji tekstów, analizie danych klientów czy automatyzacji kampanii reklamowych.
 
-Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.`,
+Jednak pamiętaj, że AI to narzędzie, nie zastępstwo dla kreatywności. Najlepsze wyniki osiągniesz, łącząc możliwości sztucznej inteligencji z ludzką intuicją i doświadczeniem.`,
     category: "ai",
     categoryLabel: "Sztuczna Inteligencja AI",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
@@ -112,11 +120,11 @@ Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et d
     id: "4",
     title: "Darmowy kurs: Facebook Ads od podstaw - Lekcja 1",
     excerpt: "Rozpocznij swoją przygodę z reklamami na Facebooku. Pierwszy moduł naszego darmowego kursu krok po kroku.",
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna.
+    content: `Witaj w pierwszej lekcji kursu Facebook Ads! Nauczysz się tutaj podstaw tworzenia skutecznych kampanii reklamowych.
 
-Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+Zaczniemy od konfiguracji konta reklamowego i menedżera reklam. Poznasz strukturę kampanii (kampania → zestaw reklam → reklama) i dowiesz się, jak określać cele reklamowe.
 
-Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.`,
+W kolejnych lekcjach przejdziemy do bardziej zaawansowanych tematów, takich jak targetowanie, optymalizacja budżetu i tworzenie kreacji reklamowych.`,
     category: "darmowe-kursy",
     categoryLabel: "Darmowe Kursy",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
@@ -128,31 +136,68 @@ Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursu
 export const services: Service[] = [
   {
     id: "1",
-    title: "Strony WordPress",
-    description: "Tworzę profesjonalne strony internetowe na WordPress. Od prostych wizytówek po rozbudowane sklepy e-commerce.",
-    icon: "globe",
-    features: ["Responsywny design", "SEO optimization", "Integracja z social media", "Panel administracyjny"]
+    title: "Wirtualny Asystent",
+    description: "Profesjonalne wsparcie w codziennych zadaniach biznesowych",
+    icon: "headphones",
+    features: [
+      "Odpowiadanie na maile i wiadomości klientów",
+      "Obsługa telefonów i planowanie spotkań",
+      "Administrowanie fanpage na Facebooku i Instagramie",
+      "Zarządzanie kalendarzem i terminami",
+      "Przygotowywanie dokumentów i prezentacji"
+    ]
   },
   {
     id: "2",
-    title: "Grafiki Canva",
-    description: "Projektuję atrakcyjne grafiki do social media, prezentacje i materiały marketingowe w Canva.",
+    title: "Grafiki w Canva + Szkolenia",
+    description: "Tworzenie profesjonalnych materiałów wizualnych",
     icon: "palette",
-    features: ["Posty social media", "Prezentacje", "Infografiki", "Materiały drukowane"]
+    features: [
+      "Projektowanie postów na social media",
+      "Tworzenie grafik reklamowych i banerów",
+      "Przygotowywanie prezentacji i infografik",
+      "Projektowanie materiałów drukowanych (ulotki, wizytówki)",
+      "Szkolenia z Canva - nauczę Cię samodzielnie tworzyć profesjonalne grafiki"
+    ]
   },
   {
     id: "3",
-    title: "Social Media Management",
-    description: "Kompleksowa obsługa profili w mediach społecznościowych. Strategia, content, analityka.",
-    icon: "share2",
-    features: ["Strategia contentowa", "Publikacje", "Community management", "Raportowanie"]
+    title: "Szkolenia z Reklam Facebook i Instagram",
+    description: "Kompleksowe szkolenia z zakresu płatnych kampanii",
+    icon: "target",
+    features: [
+      "Tworzenie skutecznych kampanii reklamowych",
+      "Targetowanie i optymalizacja budżetu",
+      "Analiza wyników i raportowanie",
+      "Tworzenie kreacji reklamowych",
+      "Strategie remarketingowe"
+    ]
   },
   {
     id: "4",
-    title: "Kampanie reklamowe",
-    description: "Prowadzę skuteczne kampanie reklamowe na Facebooku, Instagramie i Google Ads.",
-    icon: "target",
-    features: ["Facebook Ads", "Google Ads", "Remarketing", "Optymalizacja ROI"]
+    title: "Tworzenie Stron WordPress",
+    description: "Profesjonalne strony internetowe",
+    icon: "globe",
+    features: [
+      "Projektowanie i wdrażanie stron WordPress",
+      "Responsywne layouty dostosowane do urządzeń mobilnych",
+      "Optymalizacja SEO i szybkości ładowania",
+      "Integracja z social media i narzędziami marketingowymi",
+      "Szkolenie z obsługi panelu WordPress"
+    ]
+  },
+  {
+    id: "5",
+    title: "Teksty na Social Media",
+    description: "Angażujący content dla Twojej marki",
+    icon: "pen-tool",
+    features: [
+      "Pisanie postów na Facebook i Instagram",
+      "Tworzenie strategii contentowej",
+      "Copywriting reklamowy",
+      "Planowanie kalendarza publikacji",
+      "Analiza zaangażowania i optymalizacja treści"
+    ]
   }
 ];
 

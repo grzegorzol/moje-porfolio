@@ -1,59 +1,82 @@
 import { motion } from "framer-motion";
-import SectionHeader from "@/components/SectionHeader";
-import { Award, Briefcase, GraduationCap, Heart } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 const experiences = [
   {
-    year: "2019 - Obecnie",
-    title: "Marketing Specialist",
-    company: "Freelancer",
-    description: "Kompleksowa obsługa marketingowa dla klientów z różnych branż.",
+    year: "2023-2025",
+    title: "Asystent Działu Marketingu",
+    company: "Dealz Polska",
+    description: "Koordynacja otwarć nowych sklepów, materiały marketingowe, analiza ankiet klienckich.",
   },
   {
-    year: "2017 - 2019",
-    title: "Social Media Manager",
-    company: "Agencja Marketingowa XYZ",
-    description: "Zarządzanie profilami social media dla klientów B2B i B2C.",
+    year: "2022",
+    title: "Specjalista ds. Promocji - PR",
+    company: "Partners Network",
+    description: "Tworzenie kampanii promocyjnych i współpraca z mediami.",
   },
   {
-    year: "2015 - 2017",
-    title: "Event Manager",
-    company: "Event Company",
-    description: "Organizacja eventów firmowych i masowych imprez muzycznych.",
+    year: "2018-2021",
+    title: "Współwłaściciel",
+    company: "Ambasada Kreatywności",
+    description: "Organizacja ponad 500 wydarzeń kulturalnych i muzycznych.",
+  },
+  {
+    year: "2017-2018",
+    title: "Programista WordPress",
+    company: "Gogler Sp. z o.o",
+    description: "Tworzenie profesjonalnych stron internetowych dla klientów biznesowych.",
+  },
+  {
+    year: "Od 2023",
+    title: "Freelance Event Manager",
+    company: "Działalność własna",
+    description: "Koordynacja wydarzeń DJ-skich i festiwali muzycznych.",
   },
 ];
 
-const skills = [
-  { name: "WordPress", level: 95 },
-  { name: "Canva & Design", level: 90 },
-  { name: "Facebook Ads", level: 92 },
-  { name: "Google Ads", level: 85 },
-  { name: "Social Media", level: 95 },
-  { name: "SEO", level: 80 },
+const specializations = [
+  {
+    title: "WordPress & Strony Internetowe",
+    description: "Od 2017 roku tworzę profesjonalne strony na WordPress. Pracowałem jako Programista WordPress w Gogler Sp. z o.o., gdzie realizowałem projekty dla klientów biznesowych."
+  },
+  {
+    title: "Canva & Grafika",
+    description: "Tworzę materiały graficzne dla social media, kampanii reklamowych i wydarzeń. Prowadzę również szkolenia z Canvy, ucząc innych jak samodzielnie tworzyć profesjonalne projekty."
+  },
+  {
+    title: "Social Media & Reklamy",
+    description: "Zarządzam kampaniami na Facebooku i Instagramie, tworzę strategie contentowe i prowadzę szkolenia z Facebook Ads. Doświadczenie zdobyte m.in. w Dealz Polska i Partners Network."
+  },
+  {
+    title: "Event Management",
+    description: "Zorganizowałem ponad 500 wydarzeń jako współwłaściciel Ambasady Kreatywności. Obecnie jako freelancer koordynuję wydarzenia DJ-skie i festiwale muzyczne."
+  },
+  {
+    title: "Wirtualny Asystent",
+    description: "Wspieram firmy w codziennych zadaniach: obsługa korespondencji, zarządzanie social media, koordynacja projektów, przygotowywanie raportów."
+  }
 ];
 
 export default function About() {
   return (
     <main className="pt-24">
       {/* Hero */}
-      <section className="py-16 bg-gradient-hero">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative"
             >
-              <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-primary p-1">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-secondary">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80"
                   alt="Grzegorz Olszowik"
-                  className="w-full h-full object-cover rounded-3xl"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent rounded-2xl -z-10" />
             </motion.div>
 
             {/* Content */}
@@ -62,31 +85,49 @@ export default function About() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                Cześć, jestem <span className="text-gradient">Grzegorz</span>
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                Cześć! Jestem Grzegorz Olszowik
               </h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                Marketing Specialist z ponad 5-letnim doświadczeniem w branży digital. 
-                Specjalizuję się w tworzeniu stron WordPress, projektowaniu grafik, 
-                zarządzaniu social media i prowadzeniu kampanii reklamowych.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8">
-                Wierzę, że dobry marketing to taki, który przynosi realne rezultaty. 
-                Dlatego w każdym projekcie skupiam się na celach biznesowych klienta, 
-                a nie tylko na estetyce.
+              
+              <div className="flex flex-col gap-2 mb-6">
+                <a 
+                  href="mailto:grzegorz.olszowik@gmail.com" 
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  grzegorz.olszowik@gmail.com
+                </a>
+                <a 
+                  href="tel:+48502420804" 
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  502 420 804
+                </a>
+              </div>
+
+              <p className="text-lg font-medium text-primary mb-4">
+                Marketing Specialist | Event Manager | Digital Strategist
               </p>
               
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Briefcase, label: "50+ projektów" },
-                  { icon: Heart, label: "30+ klientów" },
-                  { icon: Award, label: "5+ lat doświadczenia" },
-                  { icon: GraduationCap, label: "Certyfikaty Google" },
-                ].map(({ icon: Icon, label }) => (
-                  <div key={label} className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border">
-                    <Icon className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-medium">{label}</span>
-                  </div>
+              <p className="text-muted-foreground mb-8">
+                Jestem specjalistą od marketingu internetowego z ponad 8-letnim doświadczeniem w branży. 
+                Moją pasją jest łączenie kreatywności z praktycznymi rozwiązaniami biznesowymi.
+              </p>
+
+              {/* Specializations */}
+              <h2 className="text-2xl font-display font-bold mb-6">Moja specjalizacja</h2>
+              <div className="space-y-6">
+                {specializations.map((spec, index) => (
+                  <motion.div
+                    key={spec.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                  >
+                    <h3 className="font-semibold mb-1">{spec.title}</h3>
+                    <p className="text-sm text-muted-foreground">{spec.description}</p>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -94,49 +135,17 @@ export default function About() {
         </div>
       </section>
 
-      {/* Skills */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <SectionHeader
-            title="Umiejętności"
-            subtitle="Technologie i narzędzia, w których się specjalizuję"
-          />
-
-          <div className="max-w-3xl mx-auto grid gap-6">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="flex justify-between mb-2">
-                  <span className="font-medium">{skill.name}</span>
-                  <span className="text-muted-foreground">{skill.level}%</span>
-                </div>
-                <div className="h-3 bg-secondary rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    className="h-full bg-gradient-primary rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Experience */}
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            title="Doświadczenie"
-            subtitle="Moja ścieżka zawodowa"
-          />
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl font-display font-bold mb-12 text-center"
+          >
+            Doświadczenie
+          </motion.h2>
 
           <div className="max-w-3xl mx-auto">
             {experiences.map((exp, index) => (
@@ -148,7 +157,7 @@ export default function About() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative pl-8 pb-12 last:pb-0 border-l-2 border-border"
               >
-                <div className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-gradient-primary" />
+                <div className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-primary" />
                 <span className="text-sm text-primary font-medium">{exp.year}</span>
                 <h3 className="text-xl font-display font-semibold mt-1">{exp.title}</h3>
                 <p className="text-muted-foreground font-medium">{exp.company}</p>
@@ -156,6 +165,20 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-muted-foreground mb-4">📧 grzegorz.olszowik@gmail.com</p>
+            <p className="text-muted-foreground">📱 502 420 804</p>
+          </motion.div>
         </div>
       </section>
     </main>
