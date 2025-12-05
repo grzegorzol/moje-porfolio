@@ -51,10 +51,10 @@ export default function Navbar() {
             <Link
               key={link.href}
               to={link.href}
-              className={`px-4 py-2 text-sm font-semibold transition-colors ${
+              className={`px-4 py-2 text-sm font-semibold rounded-lg border border-transparent transition-all duration-200 ${
                 location.pathname === link.href
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground border-border"
+                  : "text-muted-foreground hover:text-foreground hover:border-border"
               }`}
             >
               {link.label}
