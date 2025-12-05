@@ -28,34 +28,29 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group"
+      className="group p-8 rounded-2xl bg-background border border-border transition-all duration-300 hover:shadow-xl hover:border-primary/30"
     >
-      <div className="h-full p-8 rounded-2xl bg-card border border-border transition-all duration-500 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
-        {/* Icon */}
-        <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6 shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
-          <Icon className="w-7 h-7 text-primary-foreground" />
-        </div>
-
-        {/* Title */}
-        <h3 className="text-xl font-display font-semibold mb-3">
-          {service.title}
-        </h3>
-
-        {/* Description */}
-        <p className="text-muted-foreground text-sm mb-6">
-          {service.description}
-        </p>
-
-        {/* Features */}
-        <ul className="space-y-2">
-          {service.features.map((feature) => (
-            <li key={feature} className="flex items-center gap-2 text-sm text-foreground/80">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-              {feature}
-            </li>
-          ))}
-        </ul>
+      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+        <Icon className="w-7 h-7 text-primary" />
       </div>
+      
+      <h3 className="text-xl font-display font-semibold text-foreground mb-3">
+        {service.title}
+      </h3>
+      
+      <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+        {service.description}
+      </p>
+
+      {/* Features */}
+      <ul className="space-y-2">
+        {service.features.map((feature) => (
+          <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            {feature}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 }

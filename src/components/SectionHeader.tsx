@@ -3,23 +3,22 @@ import { motion } from "framer-motion";
 interface SectionHeaderProps {
   title: string;
   subtitle?: string;
-  centered?: boolean;
+  align?: "left" | "center";
 }
 
-export default function SectionHeader({ title, subtitle, centered = true }: SectionHeaderProps) {
+export default function SectionHeader({ title, subtitle, align = "center" }: SectionHeaderProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className={`mb-12 ${centered ? "text-center" : ""}`}
+      className={`mb-16 ${align === "center" ? "text-center max-w-2xl mx-auto" : ""}`}
     >
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-4 text-lg text-muted-foreground">
           {subtitle}
         </p>
       )}

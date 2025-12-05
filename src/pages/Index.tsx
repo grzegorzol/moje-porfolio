@@ -35,7 +35,7 @@ export default function Index() {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="rounded-full">
               <Link to="/projekty">
                 Zobacz wszystkie projekty
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -46,7 +46,7 @@ export default function Index() {
       </section>
 
       {/* Services */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-24 bg-secondary/50">
         <div className="container mx-auto px-4">
           <SectionHeader
             title="Dla klienta"
@@ -65,8 +65,8 @@ export default function Index() {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <SectionHeader
-            title="Blog Marketingowy"
-            subtitle="Najnowsze artykuły, porady i darmowe kursy z marketingu cyfrowego"
+            title="Blog"
+            subtitle="Najnowsze artykuły i porady z marketingu cyfrowego"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -81,7 +81,7 @@ export default function Index() {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Button asChild size="lg" className="bg-gradient-primary hover:opacity-90">
+            <Button asChild size="lg" className="rounded-full bg-primary hover:bg-primary/90">
               <Link to="/blog">
                 Zobacz wszystkie artykuły
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -92,36 +92,24 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-              backgroundSize: "40px 40px"
-            }}
-          />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="py-24 bg-foreground">
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-background mb-6">
               Gotowy na współpracę?
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8">
-              Skontaktuj się ze mną i porozmawiajmy o Twoim projekcie. 
-              Razem stworzymy skuteczną strategię marketingową.
+            <p className="text-lg text-background/70 mb-8">
+              Skontaktuj się ze mną i porozmawiajmy o Twoim projekcie.
             </p>
             <Button
               asChild
               size="lg"
-              variant="secondary"
-              className="px-8"
+              className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Link to="/kontakt">
                 Napisz do mnie
