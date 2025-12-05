@@ -51,7 +51,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               to={link.href}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-semibold transition-colors ${
                 location.pathname === link.href
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -97,7 +97,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
                     location.pathname === link.href
                       ? "bg-secondary text-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-secondary"
