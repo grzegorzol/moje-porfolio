@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/o-mnie", label: "O mnie" },
-  { href: "/projekty", label: "Projekty" },
+  { href: "/projekty", label: "Portfolio" },
   { href: "/dla-klienta", label: "Dla klienta" },
   { href: "/blog", label: "Blog" },
   { href: "/kontakt", label: "Kontakt" },
@@ -40,8 +40,8 @@ export default function Navbar() {
     >
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-display font-bold text-foreground">
-            GO
+          <span className="text-lg font-display font-bold text-foreground">
+            Zapraszam do współpracy
           </span>
         </Link>
 
