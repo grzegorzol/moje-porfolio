@@ -5,100 +5,66 @@ import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-background pt-20">
+    <section className="relative min-h-[70vh] flex items-center justify-center bg-secondary/30 pt-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6"
-          >
-            <span className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-              Dostępny do współpracy
-            </span>
-          </motion.div>
-
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold text-foreground mb-8 leading-[1.1]"
+            transition={{ duration: 0.5 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-foreground mb-6 leading-[1.1]"
           >
-            Tworzę skuteczne
-            <br />
-            <span className="text-primary">strategie marketingowe</span>
+            Grzegorz Olszowik
           </motion.h1>
 
-          {/* CTA Button */}
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-lg md:text-xl text-muted-foreground mb-4"
+          >
+            Marketing Specialist | Event Manager | Digital Strategist
+          </motion.p>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-muted-foreground mb-8 max-w-2xl mx-auto"
+          >
+            Tworzę strony WordPress, projektuję w Canva, zarządzam social media i prowadzę kampanie reklamowe
+          </motion.p>
+
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button
               asChild
               size="lg"
-              className="h-14 px-8 text-base rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-none"
+              className="h-12 px-8 rounded-full bg-foreground hover:bg-foreground/90 text-background"
             >
               <Link to="/projekty">
                 Zobacz portfolio
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-12 px-8 rounded-full"
+            >
+              <Link to="/kontakt">Skontaktuj się</Link>
+            </Button>
           </motion.div>
         </div>
-
-        {/* Floating UI Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-20 relative"
-        >
-          <div className="flex justify-center items-end gap-4 overflow-hidden">
-            <motion.div
-              initial={{ rotate: -8, y: 40 }}
-              animate={{ rotate: -8, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="hidden md:block w-48 lg:w-64 -mr-8 z-0"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&h=600&fit=crop"
-                alt="Social media design"
-                className="w-full rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-            
-            <motion.div
-              initial={{ y: 40 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="w-64 sm:w-80 lg:w-[500px] z-10"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop"
-                alt="Dashboard design"
-                className="w-full rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-            
-            <motion.div
-              initial={{ rotate: 8, y: 40 }}
-              animate={{ rotate: 8, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="hidden md:block w-48 lg:w-64 -ml-8 z-0"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=600&fit=crop"
-                alt="Mobile app design"
-                className="w-full rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

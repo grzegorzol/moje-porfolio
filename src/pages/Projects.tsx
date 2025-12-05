@@ -1,46 +1,51 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
-import SectionHeader from "@/components/SectionHeader";
-import { projects } from "@/data/portfolioData";
-
-const categories = ["Wszystkie", "Strony WordPress", "Grafiki Canva", "Social Media", "Marketing"];
+import { projects, projectCategories } from "@/data/portfolioData";
 
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState("Wszystkie");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredProjects = activeCategory === "Wszystkie"
+  const filteredProjects = activeCategory === "all"
     ? projects
-    : projects.filter((p) => p.category === activeCategory);
+    : projects.filter((p) => p.category.toLowerCase().replace(/\s+/g, '-') === activeCategory);
 
   return (
     <main className="pt-24">
       {/* Hero */}
-      <section className="py-16 bg-gradient-hero">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <SectionHeader
-            title="Moje projekty"
-            subtitle="Zobacz realizacje, które przyniosły klientom realne rezultaty"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Projekty
+            </h1>
+            <p className="text-muted-foreground">
+              Odkryj moje prace w różnych kategoriach
+            </p>
+          </motion.div>
 
           {/* Category Filter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1 }}
             className="flex flex-wrap justify-center gap-3 mb-12"
           >
-            {categories.map((category) => (
+            {projectCategories.map((category) => (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
                 className={`px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? "bg-gradient-primary text-primary-foreground shadow-lg shadow-primary/25"
-                    : "bg-card border border-border hover:border-primary/30 text-foreground"
+                  activeCategory === category.id
+                    ? "bg-foreground text-background"
+                    : "bg-card border border-border hover:border-foreground/30 text-foreground"
                 }`}
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </motion.div>
@@ -48,7 +53,7 @@ export default function Projects() {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-16 bg-background">
+      <section className="py-8 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             layout

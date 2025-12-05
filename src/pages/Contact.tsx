@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -22,182 +22,134 @@ export default function Contact() {
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const contactInfo = [
-    { icon: Mail, label: "Email", value: "kontakt@grzegorzolszowik.pl", href: "mailto:kontakt@grzegorzolszowik.pl" },
-    { icon: Phone, label: "Telefon", value: "+48 123 456 789", href: "tel:+48123456789" },
-    { icon: MapPin, label: "Lokalizacja", value: "Polska", href: "#" },
-  ];
-
-  const socialLinks = [
-    { icon: Linkedin, label: "LinkedIn", href: "#" },
-    { icon: Instagram, label: "Instagram", href: "#" },
-    { icon: Facebook, label: "Facebook", href: "#" },
-  ];
 
   return (
     <main className="pt-24">
       {/* Hero */}
-      <section className="py-16 bg-gradient-hero">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center max-w-2xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Skontaktuj się <span className="text-gradient">ze mną</span>
+            {/* Icon */}
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+              <Mail className="w-10 h-10 text-primary" />
+            </div>
+
+            {/* Formula */}
+            <p className="font-mono text-sm text-muted-foreground mb-4">
+              connection = message × response
+            </p>
+
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+              Kontakt
             </h1>
             <p className="text-lg text-muted-foreground">
-              Masz pytanie lub chcesz omówić projekt? Napisz do mnie - 
-              odpowiadam w ciągu 24 godzin.
+              Masz pytania? Napisz do mnie!
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Form */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
+          <div className="max-w-xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
+              className="p-8 rounded-2xl bg-card border border-border"
             >
-              <h2 className="text-2xl font-display font-bold mb-8">Dane kontaktowe</h2>
-              
-              <div className="space-y-6 mb-12">
-                {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors group"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{label}</p>
-                      <p className="font-medium group-hover:text-primary transition-colors">{value}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Imię i nazwisko <span className="text-destructive">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Jan Kowalski"
+                  />
+                </div>
 
-              {/* Social Links */}
-              <h3 className="text-lg font-display font-semibold mb-4">Znajdź mnie w social media</h3>
-              <div className="flex gap-3">
-                {socialLinks.map(({ icon: Icon, label, href }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-12 h-12 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors"
-                    aria-label={label}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
-                ))}
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email <span className="text-destructive">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="jan@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                    Temat
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Zapytanie o współpracę"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Wiadomość <span className="text-destructive">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                    placeholder="Opisz swój projekt lub zadaj pytanie..."
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                >
+                  <Send className="mr-2 w-5 h-5" />
+                  Wyślij wiadomość
+                </Button>
+              </form>
             </motion.div>
 
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+            {/* Response note */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-center text-sm text-muted-foreground mt-6"
             >
-              <div className="p-8 rounded-2xl bg-card border border-border">
-                <h2 className="text-2xl font-display font-bold mb-6">Napisz wiadomość</h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Imię i nazwisko
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                        placeholder="Jan Kowalski"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                        placeholder="jan@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Temat
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                    >
-                      <option value="">Wybierz temat</option>
-                      <option value="strona-wordpress">Strona WordPress</option>
-                      <option value="grafiki-canva">Grafiki Canva</option>
-                      <option value="social-media">Social Media</option>
-                      <option value="kampanie-reklamowe">Kampanie reklamowe</option>
-                      <option value="inne">Inne</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Wiadomość
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                      placeholder="Opisz swój projekt..."
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-primary hover:opacity-90"
-                  >
-                    Wyślij wiadomość
-                    <Send className="ml-2 w-5 h-5" />
-                  </Button>
-                </form>
-              </div>
-            </motion.div>
+              Odpowiem na Twoją wiadomość tak szybko, jak to możliwe.
+            </motion.p>
           </div>
         </div>
       </section>
