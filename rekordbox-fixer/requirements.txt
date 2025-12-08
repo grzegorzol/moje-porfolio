@@ -1,0 +1,23 @@
+# Core dependencies
+mutagen>=1.47.0           # Audio metadata handling (MP3, WAV, FLAC, etc.)
+click>=8.1.0              # CLI framework
+
+# Metadata sources
+musicbrainzngs>=0.7.1     # MusicBrainz API client
+discogs-client>=2.3.0  # Discogs API client
+spotipy>=2.23.0           # Spotify API client
+
+# Audio fingerprinting (optional, for advanced duplicate detection)
+# pyacoustid>=1.3.0         # Chromaprint audio fingerprinting - OPTIONAL (requires system deps)
+
+# Utilities
+tqdm>=4.66.0              # Progress bars
+colorama>=0.4.6           # Colored terminal output
+tabulate>=0.9.0           # Pretty tables in CLI
+
+# XML parsing (for Rekordbox export/import)
+lxml>=4.9.0               # Fast XML processing
+
+# Image handling (for album covers)
+Pillow>=10.0.0            # Image processing
+requests>=2.31.0          # HTTP requests for downloading covers
