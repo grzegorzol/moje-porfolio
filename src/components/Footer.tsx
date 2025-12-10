@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import { ExportButton } from "./ExportButton";
 
 const socialLinks = [
   { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
@@ -58,11 +59,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
+        {/* Copyright & Export */}
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Grzegorz Olszowik. Wszelkie prawa zastrzeżone.
           </p>
+          <ExportButton />
         </div>
       </div>
     </footer>
