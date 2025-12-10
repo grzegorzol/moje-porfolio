@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Contact() {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,8 +18,8 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Wiadomość wysłana!",
-      description: "Dziękuję za kontakt. Odpowiem najszybciej jak to możliwe.",
+      title: t("contact.success.title"),
+      description: t("contact.success.desc"),
     });
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
@@ -47,10 +49,10 @@ export default function Contact() {
             </p>
 
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Kontakt
+              {t("contact.title")}
             </h1>
             <p className="text-lg text-muted-foreground">
-              Masz pytania? Napisz do mnie!
+              {t("contact.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -69,7 +71,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Imię i nazwisko <span className="text-destructive">*</span>
+                    {t("contact.name")} <span className="text-destructive">{t("contact.required")}</span>
                   </label>
                   <input
                     type="text"
@@ -79,13 +81,13 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Jan Kowalski"
+                    placeholder={t("contact.namePlaceholder")}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email <span className="text-destructive">*</span>
+                    {t("contact.email")} <span className="text-destructive">{t("contact.required")}</span>
                   </label>
                   <input
                     type="email"
@@ -95,13 +97,13 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="jan@example.com"
+                    placeholder={t("contact.emailPlaceholder")}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                    Temat
+                    {t("contact.subject")}
                   </label>
                   <input
                     type="text"
@@ -110,13 +112,13 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Zapytanie o współpracę"
+                    placeholder={t("contact.subjectPlaceholder")}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Wiadomość <span className="text-destructive">*</span>
+                    {t("contact.message")} <span className="text-destructive">{t("contact.required")}</span>
                   </label>
                   <textarea
                     id="message"
@@ -126,7 +128,7 @@ export default function Contact() {
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                    placeholder="Opisz swój projekt lub zadaj pytanie..."
+                    placeholder={t("contact.messagePlaceholder")}
                   />
                 </div>
 
@@ -136,7 +138,7 @@ export default function Contact() {
                   className="w-full"
                 >
                   <Send className="mr-2 w-5 h-5" />
-                  Wyślij wiadomość
+                  {t("contact.send")}
                 </Button>
               </form>
             </motion.div>
@@ -148,7 +150,7 @@ export default function Contact() {
               transition={{ delay: 0.4 }}
               className="text-center text-sm text-muted-foreground mt-6"
             >
-              Odpowiem na Twoją wiadomość tak szybko, jak to możliwe.
+              {t("contact.response")}
             </motion.p>
           </div>
         </div>

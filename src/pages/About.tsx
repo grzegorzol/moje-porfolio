@@ -1,64 +1,27 @@
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
 import profileImage from "@/assets/grzegorz-profile.jpg";
-
-const experiences = [
-  {
-    year: "2023-2025",
-    title: "Asystent Działu Marketingu",
-    company: "Dealz Polska",
-    description: "Koordynacja otwarć nowych sklepów, materiały marketingowe, analiza ankiet klienckich.",
-  },
-  {
-    year: "2022",
-    title: "Specjalista ds. Promocji - PR",
-    company: "Partners Network",
-    description: "Tworzenie kampanii promocyjnych i współpraca z mediami.",
-  },
-  {
-    year: "2018-2021",
-    title: "Współwłaściciel",
-    company: "Ambasada Kreatywności",
-    description: "Organizacja ponad 500 wydarzeń kulturalnych i muzycznych.",
-  },
-  {
-    year: "2017-2018",
-    title: "Programista WordPress",
-    company: "Gogler Sp. z o.o",
-    description: "Tworzenie profesjonalnych stron internetowych dla klientów biznesowych.",
-  },
-  {
-    year: "Od 2023",
-    title: "Freelance Event Manager",
-    company: "Działalność własna",
-    description: "Koordynacja wydarzeń DJ-skich i festiwali muzycznych.",
-  },
-];
-
-const specializations = [
-  {
-    title: "WordPress & Strony Internetowe",
-    description: "Od 2017 roku tworzę profesjonalne strony na WordPress. Pracowałem jako Programista WordPress w Gogler Sp. z o.o., gdzie realizowałem projekty dla klientów biznesowych."
-  },
-  {
-    title: "Canva & Grafika",
-    description: "Tworzę materiały graficzne dla social media, kampanii reklamowych i wydarzeń. Prowadzę również szkolenia z Canvy, ucząc innych jak samodzielnie tworzyć profesjonalne projekty."
-  },
-  {
-    title: "Social Media & Reklamy",
-    description: "Zarządzam kampaniami na Facebooku i Instagramie, tworzę strategie contentowe i prowadzę szkolenia z Facebook Ads. Doświadczenie zdobyte m.in. w Dealz Polska i Partners Network."
-  },
-  {
-    title: "Event Management",
-    description: "Zorganizowałem ponad 500 wydarzeń jako współwłaściciel Ambasady Kreatywności. Obecnie jako freelancer koordynuję wydarzenia DJ-skie i festiwale muzyczne."
-  },
-  {
-    title: "Wirtualny Asystent",
-    description: "Wspieram firmy w codziennych zadaniach: obsługa korespondencji, zarządzanie social media, koordynacja projektów, przygotowywanie raportów."
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+
+  const specializations = [
+    { titleKey: "about.spec.wordpress.title", descKey: "about.spec.wordpress.desc" },
+    { titleKey: "about.spec.canva.title", descKey: "about.spec.canva.desc" },
+    { titleKey: "about.spec.social.title", descKey: "about.spec.social.desc" },
+    { titleKey: "about.spec.events.title", descKey: "about.spec.events.desc" },
+    { titleKey: "about.spec.va.title", descKey: "about.spec.va.desc" },
+  ];
+
+  const experiences = [
+    { year: "2023-2025", titleKey: "about.exp1.title", companyKey: "about.exp1.company", descKey: "about.exp1.desc" },
+    { year: "2022", titleKey: "about.exp2.title", companyKey: "about.exp2.company", descKey: "about.exp2.desc" },
+    { year: "2018-2021", titleKey: "about.exp3.title", companyKey: "about.exp3.company", descKey: "about.exp3.desc" },
+    { year: "2017-2018", titleKey: "about.exp4.title", companyKey: "about.exp4.company", descKey: "about.exp4.desc" },
+    { yearKey: "about.exp5.year", titleKey: "about.exp5.title", companyKey: "about.exp5.company", descKey: "about.exp5.desc" },
+  ];
+
   return (
     <main className="pt-24">
       {/* Hero */}
@@ -87,7 +50,7 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
-                Cześć! Jestem Grzegorz Olszowik
+                {t("about.greeting")}
               </h1>
               
               <div className="flex flex-col gap-2 mb-6">
@@ -108,26 +71,25 @@ export default function About() {
               </div>
 
               <p className="text-lg font-medium text-primary mb-4">
-                Marketing Specialist | Event Manager | Digital Strategist
+                {t("about.role")}
               </p>
               
               <p className="text-muted-foreground mb-8">
-                Jestem specjalistą od marketingu internetowego z ponad 8-letnim doświadczeniem w branży. 
-                Moją pasją jest łączenie kreatywności z praktycznymi rozwiązaniami biznesowymi.
+                {t("about.intro")}
               </p>
 
               {/* Specializations */}
-              <h2 className="text-2xl font-display font-bold mb-6">Moja specjalizacja</h2>
+              <h2 className="text-2xl font-display font-bold mb-6">{t("about.specialization")}</h2>
               <div className="space-y-6">
                 {specializations.map((spec, index) => (
                   <motion.div
-                    key={spec.title}
+                    key={spec.titleKey}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                   >
-                    <h3 className="font-semibold mb-1">{spec.title}</h3>
-                    <p className="text-sm text-muted-foreground">{spec.description}</p>
+                    <h3 className="font-semibold mb-1">{t(spec.titleKey)}</h3>
+                    <p className="text-sm text-muted-foreground">{t(spec.descKey)}</p>
                   </motion.div>
                 ))}
               </div>
@@ -145,7 +107,7 @@ export default function About() {
             viewport={{ once: true }}
             className="text-3xl font-display font-bold mb-12 text-center"
           >
-            Doświadczenie
+            {t("about.experience")}
           </motion.h2>
 
           <div className="max-w-3xl mx-auto">
@@ -159,10 +121,12 @@ export default function About() {
                 className="relative pl-8 pb-12 last:pb-0 border-l-2 border-border"
               >
                 <div className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-primary" />
-                <span className="text-sm text-primary font-medium">{exp.year}</span>
-                <h3 className="text-xl font-display font-semibold mt-1">{exp.title}</h3>
-                <p className="text-muted-foreground font-medium">{exp.company}</p>
-                <p className="text-muted-foreground mt-2">{exp.description}</p>
+                <span className="text-sm text-primary font-medium">
+                  {exp.yearKey ? t(exp.yearKey) : exp.year}
+                </span>
+                <h3 className="text-xl font-display font-semibold mt-1">{t(exp.titleKey)}</h3>
+                <p className="text-muted-foreground font-medium">{t(exp.companyKey)}</p>
+                <p className="text-muted-foreground mt-2">{t(exp.descKey)}</p>
               </motion.div>
             ))}
           </div>

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { services } from "@/data/portfolioData";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Users, Zap, HeartHandshake, Globe, Palette, Target, Headphones, PenTool } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   globe: Globe,
@@ -12,30 +12,49 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "pen-tool": PenTool,
 };
 
-const benefits = [
-  {
-    icon: Award,
-    title: "Profesjonalizm",
-    description: "Terminowość i najwyższa jakość wykonania każdego projektu"
-  },
-  {
-    icon: Users,
-    title: "Indywidualne podejście",
-    description: "Każdy projekt dostosowany do unikalnych potrzeb klienta"
-  },
-  {
-    icon: Zap,
-    title: "Nowoczesne technologie",
-    description: "Wykorzystanie najnowszych narzędzi i trendów w branży"
-  },
-  {
-    icon: HeartHandshake,
-    title: "Wsparcie",
-    description: "Pomoc i konsultacje również po zakończeniu projektu"
-  }
-];
-
 export default function Services() {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: "headphones",
+      titleKey: "services.va.title",
+      descKey: "services.va.desc",
+      features: ["services.va.f1", "services.va.f2", "services.va.f3", "services.va.f4", "services.va.f5"]
+    },
+    {
+      icon: "palette",
+      titleKey: "services.canva.title",
+      descKey: "services.canva.desc",
+      features: ["services.canva.f1", "services.canva.f2", "services.canva.f3", "services.canva.f4", "services.canva.f5"]
+    },
+    {
+      icon: "target",
+      titleKey: "services.ads.title",
+      descKey: "services.ads.desc",
+      features: ["services.ads.f1", "services.ads.f2", "services.ads.f3", "services.ads.f4", "services.ads.f5"]
+    },
+    {
+      icon: "globe",
+      titleKey: "services.wordpress.title",
+      descKey: "services.wordpress.desc",
+      features: ["services.wordpress.f1", "services.wordpress.f2", "services.wordpress.f3", "services.wordpress.f4", "services.wordpress.f5"]
+    },
+    {
+      icon: "pen-tool",
+      titleKey: "services.content.title",
+      descKey: "services.content.desc",
+      features: ["services.content.f1", "services.content.f2", "services.content.f3", "services.content.f4", "services.content.f5"]
+    }
+  ];
+
+  const benefits = [
+    { icon: Award, titleKey: "services.benefit.prof.title", descKey: "services.benefit.prof.desc" },
+    { icon: Users, titleKey: "services.benefit.individual.title", descKey: "services.benefit.individual.desc" },
+    { icon: Zap, titleKey: "services.benefit.tech.title", descKey: "services.benefit.tech.desc" },
+    { icon: HeartHandshake, titleKey: "services.benefit.support.title", descKey: "services.benefit.support.desc" }
+  ];
+
   return (
     <main className="pt-24">
       {/* Hero */}
@@ -47,14 +66,14 @@ export default function Services() {
             className="max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-8 text-center">
-              Dla klienta
+              {t("services.title")}
             </h1>
             
             {/* Hero Image */}
             <div className="aspect-video rounded-2xl overflow-hidden mb-12">
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80"
-                alt="Moja oferta"
+                alt={t("services.imageAlt")}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -71,7 +90,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-3xl font-display font-bold mb-12 text-center"
           >
-            Moja oferta
+            {t("services.offer")}
           </motion.h2>
 
           <div className="max-w-4xl mx-auto space-y-8">
@@ -79,7 +98,7 @@ export default function Services() {
               const IconComponent = iconMap[service.icon] || Globe;
               return (
                 <motion.div
-                  key={service.id}
+                  key={service.titleKey}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -92,17 +111,17 @@ export default function Services() {
                     </div>
                     <div>
                       <h3 className="text-xl font-display font-bold mb-2">
-                        {index + 1}. {service.title}
+                        {index + 1}. {t(service.titleKey)}
                       </h3>
-                      <p className="text-muted-foreground mb-4">{service.description}</p>
+                      <p className="text-muted-foreground mb-4">{t(service.descKey)}</p>
                     </div>
                   </div>
                   
                   <ul className="space-y-2 pl-16">
-                    {service.features.map((feature, idx) => (
+                    {service.features.map((featureKey, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-muted-foreground">
                         <span className="text-primary mt-1">•</span>
-                        <span>{feature}</span>
+                        <span>{t(featureKey)}</span>
                       </li>
                     ))}
                   </ul>
@@ -121,7 +140,7 @@ export default function Services() {
               const IconComponent = benefit.icon;
               return (
                 <motion.div
-                  key={benefit.title}
+                  key={benefit.titleKey}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -131,8 +150,8 @@ export default function Services() {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <IconComponent className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-lg font-display font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                  <h3 className="text-lg font-display font-bold mb-2">{t(benefit.titleKey)}</h3>
+                  <p className="text-sm text-muted-foreground">{t(benefit.descKey)}</p>
                 </motion.div>
               );
             })}
@@ -149,14 +168,14 @@ export default function Services() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground mb-6">
-              Gotowy na współpracę?
+              {t("services.cta.title")}
             </h2>
             <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Skontaktuj się ze mną, aby omówić szczegóły Twojego projektu
+              {t("services.cta.desc")}
             </p>
             <Button asChild size="lg" variant="secondary">
               <Link to="/kontakt">
-                Wyślij wiadomość
+                {t("services.cta.button")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
