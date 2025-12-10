@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Image */}
@@ -27,7 +30,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5 }}
             className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-foreground mb-6 leading-[1.1]"
           >
-            Zapraszam do współpracy
+            {t("hero.title")}
           </motion.h1>
 
           {/* Subtitle */}
@@ -37,7 +40,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-lg md:text-xl text-muted-foreground mb-4"
           >
-            Marketing Specialist | Event Manager | Digital Strategist
+            {t("hero.subtitle")}
           </motion.p>
 
           {/* Description */}
@@ -47,7 +50,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            Tworzę strony internetowe, projektuję w Canva, zarządzam social media i prowadzę kampanie reklamowe
+            {t("hero.description")}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -63,7 +66,7 @@ export default function HeroSection() {
               className="h-12 px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Link to="/projekty">
-                Zobacz portfolio
+                {t("hero.cta")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
@@ -73,7 +76,7 @@ export default function HeroSection() {
               size="lg"
               className="h-12 px-8 rounded-full border-foreground/20 hover:bg-foreground/5"
             >
-              <Link to="/kontakt">Skontaktuj się</Link>
+              <Link to="/kontakt">{t("hero.contact")}</Link>
             </Button>
           </motion.div>
         </div>

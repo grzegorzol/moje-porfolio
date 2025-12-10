@@ -6,8 +6,10 @@ import { blogPosts, projects } from "@/data/portfolioData";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Index() {
+  const { t } = useLanguage();
   // Get 3 latest blog posts
   const latestPosts = blogPosts.slice(0, 3);
   // Get 3 featured projects
@@ -28,10 +30,10 @@ export default function Index() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Wybrane projekty
+              {t("index.projects.title")}
             </h2>
             <p className="text-muted-foreground">
-              Najlepsze realizacje z mojego portfolio
+              {t("index.projects.subtitle")}
             </p>
           </motion.div>
 
@@ -49,7 +51,7 @@ export default function Index() {
           >
             <Button asChild variant="outline" size="lg" className="rounded-full">
               <Link to="/projekty">
-                Zobacz wszystkie projekty
+                {t("index.projects.viewAll")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
@@ -67,10 +69,10 @@ export default function Index() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Najnowsze na blogu
+              {t("index.blog.title")}
             </h2>
             <p className="text-muted-foreground">
-              3 ostatnie wpisy z bloga marketingowego
+              {t("index.blog.subtitle")}
             </p>
           </motion.div>
 
@@ -88,7 +90,7 @@ export default function Index() {
           >
             <Button asChild variant="outline" size="lg" className="rounded-full">
               <Link to="/blog">
-                Zobacz wszystkie artykuły
+                {t("index.blog.viewAll")}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
@@ -106,11 +108,10 @@ export default function Index() {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Zrealizujmy razem Twój projekt
+              {t("index.cta.title")}
             </h2>
             <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Szukasz partnera do realizacji kampanii marketingowej, projektu graficznego lub wydarzenia? 
-              Napisz do mnie – przygotuję propozycję dopasowaną do Twoich celów i budżetu.
+              {t("index.cta.description")}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button
@@ -119,7 +120,7 @@ export default function Index() {
                 className="rounded-full"
               >
                 <Link to="/kontakt">
-                  Napisz do mnie
+                  {t("index.cta.contact")}
                 </Link>
               </Button>
               <Button
@@ -129,7 +130,7 @@ export default function Index() {
                 className="rounded-full"
               >
                 <Link to="/dla-klienta">
-                  Zobacz ofertę
+                  {t("index.cta.offer")}
                 </Link>
               </Button>
             </div>
