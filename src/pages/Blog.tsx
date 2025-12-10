@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const categories = [
     { id: "all", labelKey: "blog.category.all" },
