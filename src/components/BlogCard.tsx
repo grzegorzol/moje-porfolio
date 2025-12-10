@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { BlogPost } from "@/data/portfolioData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -9,6 +10,8 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post, index }: BlogCardProps) {
+  const { language } = useLanguage();
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -22,14 +25,14 @@ export default function BlogCard({ post, index }: BlogCardProps) {
           <div className="relative aspect-[16/10] overflow-hidden">
             <img
               src={post.image}
-              alt={post.title}
+              alt={post.title[language]}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             
             {/* Category Badge */}
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1.5 text-xs font-medium rounded-full bg-primary text-primary-foreground">
-                {post.categoryLabel}
+                {post.categoryLabel[language]}
               </span>
             </div>
             
@@ -45,10 +48,10 @@ export default function BlogCard({ post, index }: BlogCardProps) {
               {post.date}
             </time>
             <h3 className="text-lg font-display font-semibold mt-2 text-foreground line-clamp-2">
-              {post.title}
+              {post.title[language]}
             </h3>
             <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-              {post.excerpt}
+              {post.excerpt[language]}
             </p>
           </div>
         </div>

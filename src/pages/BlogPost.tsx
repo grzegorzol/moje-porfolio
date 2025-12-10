@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { blogPosts } from "@/data/portfolioData";
 import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/BlogCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const categoryColors: Record<string, string> = {
   "social-media": "bg-blue-500/10 text-blue-600 border-blue-500/20",
@@ -14,15 +15,20 @@ const categoryColors: Record<string, string> = {
 
 export default function BlogPost() {
   const { id } = useParams();
+  const { language, t } = useLanguage();
   const post = blogPosts.find((p) => p.id === id);
 
   if (!post) {
     return (
       <main className="pt-24 min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-display font-bold mb-4">Artykuł nie znaleziony</h1>
+          <h1 className="text-2xl font-display font-bold mb-4">
+            {language === 'pl' ? 'Artykuł nie znaleziony' : 'Article not found'}
+          </h1>
           <Button asChild>
-            <Link to="/blog">Wróć do bloga</Link>
+            <Link to="/blog">
+              {language === 'pl' ? 'Wróć do bloga' : 'Back to blog'}
+            </Link>
           </Button>
         </div>
       </main>
@@ -30,7 +36,7 @@ export default function BlogPost() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("pl-PL", {
+    return new Date(dateString).toLocaleDateString(language === 'pl' ? 'pl-PL' : 'en-US', {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -48,7 +54,7 @@ export default function BlogPost() {
         <div className="aspect-[21/9] w-full">
           <img
             src={post.image}
-            alt={post.title}
+            alt={post.title[language]}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
@@ -69,7 +75,7 @@ export default function BlogPost() {
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Powrót do bloga
+                {language === 'pl' ? 'Powrót do bloga' : 'Back to blog'}
               </Link>
             </motion.div>
 
@@ -81,12 +87,12 @@ export default function BlogPost() {
             >
               {/* Category */}
               <span className={`inline-block px-3 py-1.5 text-xs font-medium rounded-full border mb-4 ${categoryColors[post.category]}`}>
-                {post.categoryLabel}
+                {post.categoryLabel[language]}
               </span>
 
               {/* Title */}
               <h1 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                {post.title}
+                {post.title[language]}
               </h1>
 
               {/* Meta */}
@@ -97,17 +103,17 @@ export default function BlogPost() {
                 </span>
                 <span className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  {post.readTime} czytania
+                  {post.readTime[language]} {language === 'pl' ? 'czytania' : 'read'}
                 </span>
                 <button className="flex items-center gap-2 hover:text-primary transition-colors">
                   <Share2 className="w-4 h-4" />
-                  Udostępnij
+                  {language === 'pl' ? 'Udostępnij' : 'Share'}
                 </button>
               </div>
 
               {/* Content */}
               <div className="prose prose-lg max-w-none">
-                {post.content.split("\n\n").map((paragraph, index) => (
+                {post.content[language].split("\n\n").map((paragraph, index) => (
                   <p key={index} className="text-foreground/80 mb-4 leading-relaxed">
                     {paragraph}
                   </p>
@@ -123,7 +129,7 @@ export default function BlogPost() {
         <section className="py-24 bg-secondary/30">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-display font-bold text-center mb-12">
-              Podobne artykuły
+              {language === 'pl' ? 'Podobne artykuły' : 'Related articles'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {relatedPosts.map((relatedPost, index) => (

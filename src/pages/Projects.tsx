@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const categories = [
     { id: "all", labelKey: "projects.category.all" },
@@ -18,7 +18,7 @@ export default function Projects() {
 
   const filteredProjects = activeCategory === "all"
     ? projects
-    : projects.filter((p) => p.category.toLowerCase().replace(/\s+/g, '-') === activeCategory);
+    : projects.filter((p) => p.category.pl.toLowerCase().replace(/\s+/g, '-') === activeCategory);
 
   return (
     <main className="pt-24">

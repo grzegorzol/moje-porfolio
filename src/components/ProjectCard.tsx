@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Project } from "@/data/portfolioData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProjectCardProps {
   project: Project;
@@ -9,6 +10,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
+  const { language } = useLanguage();
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -22,7 +25,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           <div className="relative aspect-[4/3] overflow-hidden">
             <img
               src={project.image}
-              alt={project.title}
+              alt={project.title[language]}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             
@@ -38,13 +41,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Content */}
           <div className="p-6">
             <span className="text-xs font-medium text-primary uppercase tracking-wider">
-              {project.category}
+              {project.category[language]}
             </span>
             <h3 className="text-xl font-display font-semibold mt-2 text-foreground">
-              {project.title}
+              {project.title[language]}
             </h3>
             <p className="text-muted-foreground text-sm mt-2 line-clamp-2">
-              {project.description}
+              {project.description[language]}
             </p>
           </div>
         </div>
