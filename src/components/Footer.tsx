@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const socialLinks = [
   { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
@@ -8,15 +9,18 @@ const socialLinks = [
   { icon: Mail, href: "mailto:kontakt@example.com", label: "Email" },
 ];
 
-const footerLinks = [
-  { href: "/o-mnie", label: "O mnie" },
-  { href: "/projekty", label: "Projekty" },
-  { href: "/dla-klienta", label: "Dla klienta" },
-  { href: "/blog", label: "Blog" },
-  { href: "/kontakt", label: "Kontakt" },
-];
-
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks = [
+    { href: "/o-mnie", label: t("footer.about") },
+    { href: "/projekty", label: t("footer.projects") },
+    { href: "/dla-klienta", label: t("footer.services") },
+    { href: "/blog", label: t("footer.blog") },
+    { href: "/kontakt", label: t("footer.contact") },
+    { href: "/polityka-prywatnosci", label: t("footer.privacy") },
+  ];
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-4 py-12">
@@ -61,7 +65,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Grzegorz Olszowik. Wszelkie prawa zastrzeżone.
+            © {new Date().getFullYear()} Grzegorz Olszowik. {t("footer.rights")}
           </p>
         </div>
       </div>
