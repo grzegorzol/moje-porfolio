@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
-import { projects, projectCategories } from "@/data/portfolioData";
+import { projects } from "@/data/portfolioData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const { t } = useLanguage();
+
+  const categories = [
+    { id: "all", labelKey: "projects.category.all" },
+    { id: "grafiki-canva", labelKey: "projects.category.canva" },
+    { id: "marketing", labelKey: "projects.category.marketing" },
+    { id: "social-media", labelKey: "projects.category.social" },
+    { id: "strony-wordpress", labelKey: "projects.category.wordpress" }
+  ];
 
   const filteredProjects = activeCategory === "all"
     ? projects
@@ -21,10 +31,10 @@ export default function Projects() {
             className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Projekty
+              {t("projects.title")}
             </h1>
             <p className="text-muted-foreground">
-              Odkryj moje prace w różnych kategoriach
+              {t("projects.subtitle")}
             </p>
           </motion.div>
 
@@ -35,7 +45,7 @@ export default function Projects() {
             transition={{ delay: 0.1 }}
             className="flex flex-wrap justify-center gap-3 mb-12"
           >
-            {projectCategories.map((category) => (
+            {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
@@ -45,7 +55,7 @@ export default function Projects() {
                     : "bg-card border border-border hover:border-foreground/30 text-foreground"
                 }`}
               >
-                {category.label}
+                {t(category.labelKey)}
               </button>
             ))}
           </motion.div>
@@ -70,7 +80,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               className="text-center text-muted-foreground py-12"
             >
-              Brak projektów w tej kategorii.
+              {t("projects.empty")}
             </motion.p>
           )}
         </div>
