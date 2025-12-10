@@ -22,7 +22,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -31,12 +30,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Plus, Pencil, Trash2, Eye, Search } from 'lucide-react';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
 
 interface BlogPost {
   id: string;
   title: string;
   slug: string;
   excerpt: string | null;
+  content: any;
   category: string | null;
   status: 'draft' | 'published' | 'archived';
   read_time: number;
@@ -55,6 +56,7 @@ export default function AdminPosts() {
     title: '',
     slug: '',
     excerpt: '',
+    content: '',
     category: '',
     status: 'draft' as 'draft' | 'published' | 'archived',
     read_time: 5
@@ -88,11 +90,21 @@ export default function AdminPosts() {
 
     const slug = formData.slug || formData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     const published_at = formData.status === 'published' ? new Date().toISOString() : null;
+    const contentJson = formData.content ? { html: formData.content } : null;
 
     if (editingPost) {
       const { error } = await supabase
         .from('blog_posts')
-        .update({ ...formData, slug, published_at: editingPost.published_at || published_at })
+        .update({ 
+          title: formData.title,
+          slug,
+          excerpt: formData.excerpt,
+          content: contentJson,
+          category: formData.category,
+          status: formData.status,
+          read_time: formData.read_time,
+          published_at: editingPost.published_at || published_at 
+        })
         .eq('id', editingPost.id);
 
       if (error) {
@@ -103,7 +115,17 @@ export default function AdminPosts() {
     } else {
       const { error } = await supabase
         .from('blog_posts')
-        .insert([{ ...formData, slug, published_at, author_id: user?.id }]);
+        .insert([{ 
+          title: formData.title,
+          slug,
+          excerpt: formData.excerpt,
+          content: contentJson,
+          category: formData.category,
+          status: formData.status,
+          read_time: formData.read_time,
+          published_at, 
+          author_id: user?.id 
+        }]);
 
       if (error) {
         toast.error('Błąd podczas tworzenia wpisu');
@@ -114,16 +136,18 @@ export default function AdminPosts() {
 
     setIsDialogOpen(false);
     setEditingPost(null);
-    setFormData({ title: '', slug: '', excerpt: '', category: '', status: 'draft', read_time: 5 });
+    setFormData({ title: '', slug: '', excerpt: '', content: '', category: '', status: 'draft', read_time: 5 });
     fetchPosts();
   };
 
   const handleEdit = (post: BlogPost) => {
     setEditingPost(post);
+    const contentHtml = post.content?.html || '';
     setFormData({
       title: post.title,
       slug: post.slug,
       excerpt: post.excerpt || '',
+      content: contentHtml,
       category: post.category || '',
       status: post.status,
       read_time: post.read_time
@@ -190,45 +214,53 @@ export default function AdminPosts() {
             <DialogTrigger asChild>
               <Button onClick={() => {
                 setEditingPost(null);
-                setFormData({ title: '', slug: '', excerpt: '', category: '', status: 'draft', read_time: 5 });
+                setFormData({ title: '', slug: '', excerpt: '', content: '', category: '', status: 'draft', read_time: 5 });
               }}>
                 <Plus className="w-4 h-4 mr-2" />
                 Dodaj wpis
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>{editingPost ? 'Edytuj wpis' : 'Nowy wpis'}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="title">Tytuł</Label>
-                  <Input
-                    id="title"
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="slug">Slug (URL)</Label>
-                  <Input
-                    id="slug"
-                    value={formData.slug}
-                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                    placeholder="automatycznie z tytułu"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="title">Tytuł</Label>
+                    <Input
+                      id="title"
+                      value={formData.title}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="slug">Slug (URL)</Label>
+                    <Input
+                      id="slug"
+                      value={formData.slug}
+                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                      placeholder="automatycznie z tytułu"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="excerpt">Zajawka</Label>
-                  <Textarea
+                  <Input
                     id="excerpt"
                     value={formData.excerpt}
                     onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                    rows={3}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Treść wpisu</Label>
+                  <RichTextEditor
+                    content={formData.content}
+                    onChange={(content) => setFormData({ ...formData, content })}
+                  />
+                </div>
+                <div className="grid grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="category">Kategoria</Label>
                     <Input
@@ -247,22 +279,22 @@ export default function AdminPosts() {
                       onChange={(e) => setFormData({ ...formData, read_time: parseInt(e.target.value) })}
                     />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <Label>Status</Label>
-                  <Select
-                    value={formData.status}
-                    onValueChange={(v) => setFormData({ ...formData, status: v as any })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="draft">Szkic</SelectItem>
-                      <SelectItem value="published">Opublikowany</SelectItem>
-                      <SelectItem value="archived">Zarchiwizowany</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="space-y-2">
+                    <Label>Status</Label>
+                    <Select
+                      value={formData.status}
+                      onValueChange={(v) => setFormData({ ...formData, status: v as any })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="draft">Szkic</SelectItem>
+                        <SelectItem value="published">Opublikowany</SelectItem>
+                        <SelectItem value="archived">Zarchiwizowany</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
                 <div className="flex justify-end gap-2">
                   <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>

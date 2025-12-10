@@ -22,7 +22,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -31,11 +30,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Plus, Pencil, Trash2, Eye, Search } from 'lucide-react';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
 
 interface Page {
   id: string;
   title: string;
   slug: string;
+  content: any;
+  meta_description: string | null;
   status: 'draft' | 'published' | 'archived';
   parent_id: string | null;
   sort_order: number;
@@ -53,6 +55,7 @@ export default function AdminPages() {
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
+    content: '',
     meta_description: '',
     status: 'draft' as 'draft' | 'published' | 'archived',
     parent_id: null as string | null,
@@ -86,11 +89,20 @@ export default function AdminPages() {
     e.preventDefault();
 
     const slug = formData.slug || formData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const contentJson = formData.content ? { html: formData.content } : null;
 
     if (editingPage) {
       const { error } = await supabase
         .from('pages')
-        .update({ ...formData, slug })
+        .update({ 
+          title: formData.title,
+          slug,
+          content: contentJson,
+          meta_description: formData.meta_description,
+          status: formData.status,
+          parent_id: formData.parent_id,
+          sort_order: formData.sort_order
+        })
         .eq('id', editingPage.id);
 
       if (error) {
@@ -101,7 +113,16 @@ export default function AdminPages() {
     } else {
       const { error } = await supabase
         .from('pages')
-        .insert([{ ...formData, slug, author_id: user?.id }]);
+        .insert([{ 
+          title: formData.title,
+          slug,
+          content: contentJson,
+          meta_description: formData.meta_description,
+          status: formData.status,
+          parent_id: formData.parent_id,
+          sort_order: formData.sort_order,
+          author_id: user?.id 
+        }]);
 
       if (error) {
         toast.error('Błąd podczas tworzenia strony');
@@ -112,16 +133,18 @@ export default function AdminPages() {
 
     setIsDialogOpen(false);
     setEditingPage(null);
-    setFormData({ title: '', slug: '', meta_description: '', status: 'draft', parent_id: null, sort_order: 0 });
+    setFormData({ title: '', slug: '', content: '', meta_description: '', status: 'draft', parent_id: null, sort_order: 0 });
     fetchPages();
   };
 
   const handleEdit = (page: Page) => {
     setEditingPage(page);
+    const contentHtml = page.content?.html || '';
     setFormData({
       title: page.title,
       slug: page.slug,
-      meta_description: '',
+      content: contentHtml,
+      meta_description: page.meta_description || '',
       status: page.status,
       parent_id: page.parent_id,
       sort_order: page.sort_order
@@ -188,42 +211,50 @@ export default function AdminPages() {
             <DialogTrigger asChild>
               <Button onClick={() => {
                 setEditingPage(null);
-                setFormData({ title: '', slug: '', meta_description: '', status: 'draft', parent_id: null, sort_order: 0 });
+                setFormData({ title: '', slug: '', content: '', meta_description: '', status: 'draft', parent_id: null, sort_order: 0 });
               }}>
                 <Plus className="w-4 h-4 mr-2" />
                 Dodaj stronę
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-lg">
+            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>{editingPage ? 'Edytuj stronę' : 'Nowa strona'}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="title">Tytuł</Label>
-                  <Input
-                    id="title"
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="slug">Slug (URL)</Label>
-                  <Input
-                    id="slug"
-                    value={formData.slug}
-                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                    placeholder="automatycznie z tytułu"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="title">Tytuł</Label>
+                    <Input
+                      id="title"
+                      value={formData.title}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="slug">Slug (URL)</Label>
+                    <Input
+                      id="slug"
+                      value={formData.slug}
+                      onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                      placeholder="automatycznie z tytułu"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="meta_description">Meta opis</Label>
-                  <Textarea
+                  <Input
                     id="meta_description"
                     value={formData.meta_description}
                     onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
-                    rows={3}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Treść strony</Label>
+                  <RichTextEditor
+                    content={formData.content}
+                    onChange={(content) => setFormData({ ...formData, content })}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
