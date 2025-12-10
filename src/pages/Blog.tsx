@@ -2,10 +2,20 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import BlogCard from "@/components/BlogCard";
 import SectionHeader from "@/components/SectionHeader";
-import { blogPosts, blogCategories } from "@/data/portfolioData";
+import { blogPosts } from "@/data/portfolioData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const { t } = useLanguage();
+
+  const categories = [
+    { id: "all", labelKey: "blog.category.all" },
+    { id: "social-media", labelKey: "blog.category.social" },
+    { id: "bezpieczenstwo", labelKey: "blog.category.security" },
+    { id: "ai", labelKey: "blog.category.ai" },
+    { id: "darmowe-kursy", labelKey: "blog.category.courses" }
+  ];
 
   const filteredPosts = activeCategory === "all"
     ? blogPosts
@@ -17,8 +27,8 @@ export default function Blog() {
       <section className="py-16 bg-gradient-hero">
         <div className="container mx-auto px-4">
           <SectionHeader
-            title="Blog Marketingowy"
-            subtitle="Artykuły, porady i darmowe kursy z marketingu cyfrowego"
+            title={t("blog.title")}
+            subtitle={t("blog.subtitle")}
           />
 
           {/* Category Filter */}
@@ -28,7 +38,7 @@ export default function Blog() {
             transition={{ delay: 0.2 }}
             className="flex flex-wrap justify-center gap-3 mb-12"
           >
-            {blogCategories.map((category) => (
+            {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
@@ -38,7 +48,7 @@ export default function Blog() {
                     : "bg-card border border-border hover:border-primary/30 text-foreground"
                 }`}
               >
-                {category.label}
+                {t(category.labelKey)}
               </button>
             ))}
           </motion.div>
@@ -63,7 +73,7 @@ export default function Blog() {
               animate={{ opacity: 1 }}
               className="text-center text-muted-foreground py-12"
             >
-              Brak artykułów w tej kategorii.
+              {t("blog.empty")}
             </motion.p>
           )}
         </div>
@@ -79,19 +89,19 @@ export default function Blog() {
             className="max-w-2xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Nie przegap nowych artykułów
+              {t("blog.newsletter.title")}
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Zapisz się do newslettera i otrzymuj najnowsze porady marketingowe prosto na skrzynkę.
+              {t("blog.newsletter.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Twój adres e-mail"
+                placeholder={t("blog.newsletter.placeholder")}
                 className="flex-1 px-4 py-3 rounded-lg border border-border bg-card focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <button className="px-6 py-3 rounded-lg bg-gradient-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
-                Zapisz się
+                {t("blog.newsletter.button")}
               </button>
             </div>
           </motion.div>

@@ -37,6 +37,30 @@ export const translations: Translations = {
   "index.cta.contact": { pl: "Napisz do mnie", en: "Contact me" },
   "index.cta.offer": { pl: "Zobacz ofertę", en: "See offer" },
   
+  // Projects page
+  "projects.title": { pl: "Projekty", en: "Projects" },
+  "projects.subtitle": { pl: "Odkryj moje prace w różnych kategoriach", en: "Discover my work across different categories" },
+  "projects.empty": { pl: "Brak projektów w tej kategorii.", en: "No projects in this category." },
+  "projects.category.all": { pl: "Wszystkie", en: "All" },
+  "projects.category.canva": { pl: "Grafiki Canva", en: "Canva Graphics" },
+  "projects.category.marketing": { pl: "Marketing", en: "Marketing" },
+  "projects.category.social": { pl: "Social Media", en: "Social Media" },
+  "projects.category.wordpress": { pl: "Strony WordPress", en: "WordPress Sites" },
+  
+  // Blog page
+  "blog.title": { pl: "Blog Marketingowy", en: "Marketing Blog" },
+  "blog.subtitle": { pl: "Artykuły, porady i darmowe kursy z marketingu cyfrowego", en: "Articles, tips and free courses on digital marketing" },
+  "blog.empty": { pl: "Brak artykułów w tej kategorii.", en: "No articles in this category." },
+  "blog.newsletter.title": { pl: "Nie przegap nowych artykułów", en: "Don't miss new articles" },
+  "blog.newsletter.subtitle": { pl: "Zapisz się do newslettera i otrzymuj najnowsze porady marketingowe prosto na skrzynkę.", en: "Subscribe to the newsletter and receive the latest marketing tips straight to your inbox." },
+  "blog.newsletter.placeholder": { pl: "Twój adres e-mail", en: "Your email address" },
+  "blog.newsletter.button": { pl: "Zapisz się", en: "Subscribe" },
+  "blog.category.all": { pl: "Wszystkie", en: "All" },
+  "blog.category.social": { pl: "Social Media", en: "Social Media" },
+  "blog.category.security": { pl: "Bezpieczeństwo", en: "Security" },
+  "blog.category.ai": { pl: "Sztuczna Inteligencja AI", en: "Artificial Intelligence AI" },
+  "blog.category.courses": { pl: "Darmowe Kursy", en: "Free Courses" },
+  
   // About
   "about.title": { pl: "O mnie", en: "About me" },
   "about.description": { pl: "Jestem pasjonatem technologii z wieloletnim doświadczeniem", en: "I'm a technology enthusiast with years of experience" },
@@ -97,6 +121,7 @@ export const translations: Translations = {
   "common.learnMore": { pl: "Dowiedz się więcej", en: "Learn more" },
   "common.readMore": { pl: "Czytaj więcej", en: "Read more" },
   "common.viewAll": { pl: "Zobacz wszystkie", en: "View all" },
+  "common.minRead": { pl: "min", en: "min" },
 };
 
 interface LanguageContextType {
