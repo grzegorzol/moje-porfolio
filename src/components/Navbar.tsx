@@ -3,20 +3,24 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/o-mnie", label: "O mnie" },
-  { href: "/projekty", label: "Portfolio" },
-  { href: "/dla-klienta", label: "Dla klienta" },
-  { href: "/blog", label: "Blog" },
-  { href: "/kontakt", label: "Kontakt" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import ThemeToggle from "@/components/ThemeToggle";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", label: t("nav.home") },
+    { href: "/o-mnie", label: t("nav.about") },
+    { href: "/projekty", label: t("nav.portfolio") },
+    { href: "/dla-klienta", label: t("nav.services") },
+    { href: "/blog", label: t("nav.blog") },
+    { href: "/kontakt", label: t("nav.contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,25 +66,30 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* Controls */}
+        <div className="hidden md:flex items-center gap-2">
+          <LanguageToggle />
+          <ThemeToggle />
           <Button
             asChild
-            className="rounded-full bg-foreground text-background hover:bg-foreground/90"
+            className="rounded-full bg-foreground text-background hover:bg-foreground/90 ml-2"
           >
-            <Link to="/kontakt">Kontakt</Link>
+            <Link to="/kontakt">{t("nav.contact")}</Link>
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X /> : <Menu />}
-        </Button>
+        {/* Mobile Controls */}
+        <div className="flex md:hidden items-center gap-1">
+          <LanguageToggle />
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X /> : <Menu />}
+          </Button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}
