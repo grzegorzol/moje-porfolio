@@ -62,13 +62,17 @@ CREATE TRIGGER user_roles_set_updated_at
 -- ============================================
 ALTER TABLE public.user_roles ENABLE ROW LEVEL SECURITY;
 
--- Usuń stare polityki jeśli istnieją
+-- Usuń WSZYSTKIE stare polityki jeśli istnieją
 DROP POLICY IF EXISTS "Public roles are viewable by everyone" ON public.user_roles;
 DROP POLICY IF EXISTS "Only admins can update roles" ON public.user_roles;
 DROP POLICY IF EXISTS "user_roles_select_own" ON public.user_roles;
 DROP POLICY IF EXISTS "user_roles_insert_own" ON public.user_roles;
 DROP POLICY IF EXISTS "user_roles_update_own" ON public.user_roles;
 DROP POLICY IF EXISTS "user_roles_delete_own" ON public.user_roles;
+DROP POLICY IF EXISTS "Anyone can view roles" ON public.user_roles;
+DROP POLICY IF EXISTS "Users can insert own role" ON public.user_roles;
+DROP POLICY IF EXISTS "Only admins can update any roles" ON public.user_roles;
+DROP POLICY IF EXISTS "Only admins can delete roles" ON public.user_roles;
 
 -- Nowe polityki RLS
 CREATE POLICY "Anyone can view roles"
@@ -329,6 +333,10 @@ END$$;
 DROP POLICY IF EXISTS "Public Access" ON storage.objects;
 DROP POLICY IF EXISTS "Auth Upload" ON storage.objects;
 DROP POLICY IF EXISTS "Auth Delete" ON storage.objects;
+DROP POLICY IF EXISTS "Public can view media" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can upload media" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can update own media" ON storage.objects;
+DROP POLICY IF EXISTS "Authenticated users can delete media" ON storage.objects;
 
 -- Polityki dla Storage
 CREATE POLICY "Public can view media"
