@@ -26,6 +26,7 @@ import AdminHeader from "./pages/admin/AdminHeader";
 import AdminFooter from "./pages/admin/AdminFooter";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminLayout from "./components/admin/AdminLayout";
+import TestDatabase from "./pages/TestDatabase";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
                 <Route path="/admin/header" element={<AdminLayout><AdminHeader /></AdminLayout>} />
                 <Route path="/admin/footer" element={<AdminLayout><AdminFooter /></AdminLayout>} />
                 <Route path="/admin/settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
+                <Route path="/test-database" element={<TestDatabase />} />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>
