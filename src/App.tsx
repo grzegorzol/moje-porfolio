@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
+import AdminRegister from "./pages/AdminRegister";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPages from "./pages/admin/AdminPages";
 import AdminProjects from "./pages/admin/AdminProjects";
@@ -26,6 +27,7 @@ import AdminMedia from "./pages/admin/AdminMedia";
 import AdminHeader from "./pages/admin/AdminHeader";
 import AdminFooter from "./pages/admin/AdminFooter";
 import AdminSettings from "./pages/admin/AdminSettings";
+import AdminInvitations from "./pages/admin/AdminInvitations";
 import AdminLayout from "./components/admin/AdminLayout";
 
 const queryClient = new QueryClient();
@@ -54,6 +56,7 @@ const App = () => (
                 
                 {/* Admin routes */}
                 <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/register" element={<AdminRegister />} />
                 <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
                 <Route path="/admin/pages" element={<AdminLayout><AdminPages /></AdminLayout>} />
                 <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
@@ -62,6 +65,7 @@ const App = () => (
                 <Route path="/admin/header" element={<AdminLayout><AdminHeader /></AdminLayout>} />
                 <Route path="/admin/footer" element={<AdminLayout><AdminFooter /></AdminLayout>} />
                 <Route path="/admin/settings" element={<AdminLayout><AdminSettings /></AdminLayout>} />
+                <Route path="/admin/invitations" element={<AdminLayout><AdminInvitations /></AdminLayout>} />
                 
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -12,7 +12,8 @@ import {
   ChevronLeft,
   Layers,
   Footprints,
-  Briefcase
+  Briefcase,
+  KeyRound
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -25,6 +26,7 @@ const menuItems = [
   { title: 'Media', icon: Image, href: '/admin/media' },
   { title: 'Nagłówek', icon: FileText, href: '/admin/header' },
   { title: 'Stopka', icon: Footprints, href: '/admin/footer' },
+  { title: 'Zaproszenia', icon: KeyRound, href: '/admin/invitations' },
   { title: 'Ustawienia', icon: Settings, href: '/admin/settings' },
 ];
 
