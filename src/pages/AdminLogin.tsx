@@ -143,6 +143,13 @@ export default function AdminLogin() {
             >
               {isSubmitting ? 'Logowanie...' : 'Zaloguj się'}
             </Button>
+
+            <p className="text-center text-sm text-muted-foreground">
+              Masz kod zaproszenia?{' '}
+              <a href="/admin/register" className="text-primary hover:underline">
+                Zarejestruj się jako admin
+              </a>
+            </p>
           </form>
         </div>
       </motion.div>
