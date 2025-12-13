@@ -11,7 +11,8 @@ import {
   Menu,
   ChevronLeft,
   Layers,
-  Footprints
+  Footprints,
+  Briefcase
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -19,6 +20,7 @@ import { cn } from '@/lib/utils';
 const menuItems = [
   { title: 'Dashboard', icon: LayoutDashboard, href: '/admin' },
   { title: 'Strony', icon: Layers, href: '/admin/pages' },
+  { title: 'Portfolio', icon: Briefcase, href: '/admin/projects' },
   { title: 'Blog', icon: PenTool, href: '/admin/posts' },
   { title: 'Media', icon: Image, href: '/admin/media' },
   { title: 'Nagłówek', icon: FileText, href: '/admin/header' },

@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Image, Settings, Layout, PenTool, Users } from 'lucide-react';
+import { FileText, Image, Settings, Layout, PenTool, Briefcase, Footprints } from 'lucide-react';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { user, isAdmin, isLoading } = useAuth();
   const [stats, setStats] = useState({
     pages: 0,
+    projects: 0,
     posts: 0,
     media: 0
   });
@@ -23,14 +24,16 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const fetchStats = async () => {
-      const [pagesRes, postsRes, mediaRes] = await Promise.all([
+      const [pagesRes, projectsRes, postsRes, mediaRes] = await Promise.all([
         supabase.from('pages').select('id', { count: 'exact', head: true }),
+        supabase.from('projects').select('id', { count: 'exact', head: true }),
         supabase.from('blog_posts').select('id', { count: 'exact', head: true }),
         supabase.from('media').select('id', { count: 'exact', head: true })
       ]);
 
       setStats({
         pages: pagesRes.count || 0,
+        projects: projectsRes.count || 0,
         posts: postsRes.count || 0,
         media: mediaRes.count || 0
       });
@@ -51,10 +54,11 @@ export default function AdminDashboard() {
 
   const menuItems = [
     { title: 'Strony', description: 'Zarządzaj stronami', icon: Layout, href: '/admin/pages', count: stats.pages },
+    { title: 'Portfolio', description: 'Projekty w portfolio', icon: Briefcase, href: '/admin/projects', count: stats.projects },
     { title: 'Blog', description: 'Wpisy na blogu', icon: PenTool, href: '/admin/posts', count: stats.posts },
     { title: 'Media', description: 'Biblioteka mediów', icon: Image, href: '/admin/media', count: stats.media },
     { title: 'Nagłówek', description: 'Edytuj nawigację', icon: FileText, href: '/admin/header' },
-    { title: 'Stopka', description: 'Edytuj stopkę', icon: FileText, href: '/admin/footer' },
+    { title: 'Stopka', description: 'Edytuj stopkę', icon: Footprints, href: '/admin/footer' },
     { title: 'Ustawienia', description: 'Ustawienia strony', icon: Settings, href: '/admin/settings' },
   ];
 
