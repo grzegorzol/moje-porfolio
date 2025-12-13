@@ -33,7 +33,8 @@ import {
   Youtube as YoutubeIcon,
   Table as TableIcon,
   Highlighter,
-  Eye
+  Eye,
+  GalleryHorizontal
 } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import {
@@ -48,6 +49,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { MediaGalleryPicker } from './MediaGalleryPicker';
 
 interface RichTextEditorProps {
   content: string;
@@ -58,6 +60,8 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({ content, onChange, placeholder, showPreview = true }: RichTextEditorProps) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isMediaPickerOpen, setIsMediaPickerOpen] = useState(false);
+  const [isGalleryPickerOpen, setIsGalleryPickerOpen] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -136,14 +140,19 @@ export function RichTextEditor({ content, onChange, placeholder, showPreview = t
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }, [editor]);
 
-  const addImage = useCallback(() => {
+  const addImageFromGallery = useCallback((url: string) => {
+    if (!editor) return;
+    editor.chain().focus().setImage({ src: url }).run();
+  }, [editor]);
+
+  const addGallery = useCallback((urls: string[]) => {
     if (!editor) return;
     
-    const url = window.prompt('URL obrazka:');
-
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
+    const galleryHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
+      ${urls.map(url => `<img src="${url}" class="w-full h-48 object-cover rounded-lg" />`).join('')}
+    </div>`;
+    
+    editor.chain().focus().insertContent(galleryHtml).run();
   }, [editor]);
 
   const addYoutube = useCallback(() => {
@@ -349,10 +358,19 @@ export function RichTextEditor({ content, onChange, placeholder, showPreview = t
           type="button"
           variant="ghost"
           size="sm"
-          onClick={addImage}
-          title="Obrazek"
+          onClick={() => setIsMediaPickerOpen(true)}
+          title="Obrazek z biblioteki"
         >
           <ImageIcon className="w-4 h-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsGalleryPickerOpen(true)}
+          title="Galeria zdjęć"
+        >
+          <GalleryHorizontal className="w-4 h-4" />
         </Button>
         <Button
           type="button"
@@ -461,6 +479,22 @@ export function RichTextEditor({ content, onChange, placeholder, showPreview = t
           />
         </DialogContent>
       </Dialog>
+
+      {/* Media Picker for single image */}
+      <MediaGalleryPicker
+        open={isMediaPickerOpen}
+        onClose={() => setIsMediaPickerOpen(false)}
+        onSelect={addImageFromGallery}
+      />
+
+      {/* Media Picker for gallery */}
+      <MediaGalleryPicker
+        open={isGalleryPickerOpen}
+        onClose={() => setIsGalleryPickerOpen(false)}
+        onSelect={() => {}}
+        multiple
+        onSelectMultiple={addGallery}
+      />
     </div>
   );
 }
