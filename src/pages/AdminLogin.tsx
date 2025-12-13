@@ -7,6 +7,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import { z } from 'zod';
+
+const loginSchema = z.object({
+  email: z.string().email('Nieprawidłowy adres email').max(255),
+  password: z.string().min(6, 'Hasło musi mieć minimum 6 znaków').max(128)
+});
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -15,6 +21,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
   useEffect(() => {
     if (!isLoading && user && isAdmin) {
@@ -24,16 +31,32 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
+
+    // Validate input
+    const result = loginSchema.safeParse({ email, password });
+    if (!result.success) {
+      const fieldErrors: { email?: string; password?: string } = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0] === 'email') fieldErrors.email = err.message;
+        if (err.path[0] === 'password') fieldErrors.password = err.message;
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const { error } = await signIn(email, password);
+    const { error } = await signIn(email.trim(), password);
 
     if (error) {
-      toast.error('Błąd logowania', {
-        description: error.message === 'Invalid login credentials' 
-          ? 'Nieprawidłowy email lub hasło'
-          : error.message
-      });
+      const errorMessage = error.message === 'Invalid login credentials'
+        ? 'Nieprawidłowy email lub hasło'
+        : error.message === 'Email not confirmed'
+        ? 'Email nie został potwierdzony'
+        : error.message;
+      
+      toast.error('Błąd logowania', { description: errorMessage });
       setIsSubmitting(false);
       return;
     }
@@ -76,10 +99,14 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
-                  className="pl-10"
+                  className={`pl-10 ${errors.email ? 'border-destructive' : ''}`}
                   required
+                  autoComplete="email"
                 />
               </div>
+              {errors.email && (
+                <p className="text-sm text-destructive">{errors.email}</p>
+              )}
             </div>
 
             <div className="space-y-2">
@@ -92,8 +119,9 @@ export default function AdminLogin() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="pl-10 pr-10"
+                  className={`pl-10 pr-10 ${errors.password ? 'border-destructive' : ''}`}
                   required
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -103,6 +131,9 @@ export default function AdminLogin() {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-sm text-destructive">{errors.password}</p>
+              )}
             </div>
 
             <Button

@@ -204,6 +204,63 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          category_en: string | null
+          created_at: string | null
+          description: string | null
+          description_en: string | null
+          featured: boolean | null
+          id: string
+          image: string | null
+          link: string | null
+          sort_order: number | null
+          status: Database["public"]["Enums"]["page_status"] | null
+          tags: string[] | null
+          title: string
+          title_en: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          category_en?: string | null
+          created_at?: string | null
+          description?: string | null
+          description_en?: string | null
+          featured?: boolean | null
+          id?: string
+          image?: string | null
+          link?: string | null
+          sort_order?: number | null
+          status?: Database["public"]["Enums"]["page_status"] | null
+          tags?: string[] | null
+          title: string
+          title_en?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          category_en?: string | null
+          created_at?: string | null
+          description?: string | null
+          description_en?: string | null
+          featured?: boolean | null
+          id?: string
+          image?: string | null
+          link?: string | null
+          sort_order?: number | null
+          status?: Database["public"]["Enums"]["page_status"] | null
+          tags?: string[] | null
+          title?: string
+          title_en?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           id: string

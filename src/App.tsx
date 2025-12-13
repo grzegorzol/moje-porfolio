@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPages from "./pages/admin/AdminPages";
+import AdminProjects from "./pages/admin/AdminProjects";
 import AdminPosts from "./pages/admin/AdminPosts";
 import AdminMedia from "./pages/admin/AdminMedia";
 import AdminHeader from "./pages/admin/AdminHeader";
@@ -55,6 +56,7 @@ const App = () => (
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
                 <Route path="/admin/pages" element={<AdminLayout><AdminPages /></AdminLayout>} />
+                <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />
                 <Route path="/admin/posts" element={<AdminLayout><AdminPosts /></AdminLayout>} />
                 <Route path="/admin/media" element={<AdminLayout><AdminMedia /></AdminLayout>} />
                 <Route path="/admin/header" element={<AdminLayout><AdminHeader /></AdminLayout>} />
